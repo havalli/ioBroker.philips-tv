@@ -26,7 +26,7 @@ let adapter: ExtendedAdapter;
 function startAdapter(options: Partial<ioBroker.AdapterOptions> = {}) {
 	return adapter = utils.adapter({
 		// Default options
-		...options,	
+		...options,
 
 		// Custom options
 		name: "philips-tv",
@@ -113,6 +113,10 @@ function startAdapter(options: Partial<ioBroker.AdapterOptions> = {}) {
 					// send a key press to the TV
 					endpoint = "input/key";
 					payload = { key: state.val };
+				} else if (/\.power$/.test(id)) {
+					// send a key press to the TV
+					endpoint = "input/key";
+					payload = { key: "Standby" };
 				}
 
 				if (endpoint != null && payload != null) {
@@ -184,6 +188,7 @@ async function poll(): Promise<void> {
 	// TODO
 	await Promise.all([
 		requestAudio(),
+		requestPower(),
 	]);
 }
 
@@ -226,6 +231,28 @@ async function requestAudio() {
 	} catch (e) { /* it's ok */ }
 }
 
+async function requestPower() {
+	try {
+		const result = JSON.parse(await GET("powerstate"));
+
+		// update muted state
+		await extendObject("power", { // alive state
+			_id: `${adapter.namespace}.power`,
+			type: "state",
+			common: {
+				name: "power",
+				read: true,
+				write: true,
+				type: "boolean",
+				role: "switch.active",
+				desc: "Indicates if the TV is powered",
+			},
+			native: { },
+		});
+		await adapter.$setStateChanged(`${adapter.namespace}.power`, result.powerstate === "On", true);
+	} catch (e) { /* it's ok */ }
+}
+
 async function extendObject(objId: string, obj: ioBroker.Object) {
 	const oldObj = await adapter.$getObject(objId);
 	const newObj = Object.assign(Object.assign({}, oldObj), obj);
@@ -260,7 +287,7 @@ async function pingThread() {
 		}
 	}
 
-	pingTimer = setTimeout(pingThread, 10000);
+	pingTimer = setTimeout(pingThread, 3000);
 }
 
 // Unbehandelte Fehler tracen
