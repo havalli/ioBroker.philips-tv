@@ -64,7 +64,8 @@
     "lint:ts": "tslint",
     "lint": "npm run lint:ts \"src/**/*.ts\"",
     "deploy_local": "node --require ts-node/register maintenance/deploy_local.ts",
-    "bump": "node --require ts-node/register maintenance/bump_version.ts"
+    "bump": "node --require ts-node/register maintenance/bump_version.ts",
+    "build": "tsc -p tsconfig.json"
   },
   "nyc": {
     "include": [
