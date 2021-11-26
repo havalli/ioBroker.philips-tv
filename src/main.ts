@@ -250,7 +250,9 @@ async function requestPower() {
 			native: { },
 		});
 		await adapter.$setStateChanged(`${adapter.namespace}.power`, result.powerstate === "On", true);
-	} catch (e) { /* it's ok */ }
+	} catch (e) {
+		_.log(`Error fetching powerstate from tv: ${e.message}`, "error");
+	}
 }
 
 async function extendObject(objId: string, obj: ioBroker.Object) {
