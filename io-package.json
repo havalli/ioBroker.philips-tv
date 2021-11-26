@@ -37,7 +37,7 @@
             "tv",
             "remote"
         ],
-        "readme": "https://github.com/AlCalzone/ioBroker.philips-tv/blob/master/README.md",
+        "readme": "https://github.com/havalli/ioBroker.philips-tv/blob/master/README.md",
         "loglevel": "info",
         "type": "multimedia",
         "messagebox": true
