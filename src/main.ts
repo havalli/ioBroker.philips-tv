@@ -233,6 +233,7 @@ async function requestAudio() {
 
 async function requestPower() {
 	try {
+		_.log("Fetching powerstate from tv");
 		const result = JSON.parse(await GET("powerstate"));
 
 		// update muted state
