@@ -284,7 +284,7 @@ async function pingThread() {
 	if (connectionAlive) {
 		if (!oldValue) {
 			// connection is now alive again
-			_.log(`The TV with host ${hostname} is now reachable.`, "info");
+			_.log(`The TV with host ${hostname} is now reachable. BLA`, "info");
 		}
 		// update information
 		await poll();
