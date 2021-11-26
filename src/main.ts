@@ -194,7 +194,7 @@ async function poll(): Promise<void> {
 
 async function requestAudio() {
 	try {
-		_.log("Fetching audio volume from tv");
+		console.log("Fetching audio volume from tv");
 		const result = JSON.parse(await GET("audio/volume"));
 
 		// update muted state
@@ -234,7 +234,7 @@ async function requestAudio() {
 
 async function requestPower() {
 	try {
-		_.log("Fetching powerstate from tv");
+		console.log("Fetching powerstate from tv");
 		const result = JSON.parse(await GET("powerstate"));
 
 		// update muted state
@@ -253,7 +253,7 @@ async function requestPower() {
 		});
 		await adapter.$setStateChanged(`${adapter.namespace}.power`, result.powerstate === "On", true);
 	} catch (e) {
-		_.log(`Error fetching powerstate from tv: ${e.message}`, "error");
+		console.log(`Error fetching powerstate from tv: ${e.message}`, "error");
 	}
 }
 
