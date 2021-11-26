@@ -62,7 +62,7 @@ function startAdapter(options) {
     if (options === void 0) { options = {}; }
     return adapter = utils.adapter(__assign({}, options, { 
         // Custom options
-        name: "philips-tv", 
+        name: "philips-tv-v2",
         // Wird aufgerufen, wenn Adapter initialisiert wird
         ready: function () { return __awaiter(_this, void 0, void 0, function () {
             return __generator(this, function (_a) {

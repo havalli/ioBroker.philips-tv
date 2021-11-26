@@ -29,7 +29,7 @@ function startAdapter(options: Partial<ioBroker.AdapterOptions> = {}) {
 		...options,
 
 		// Custom options
-		name: "philips-tv",
+		name: "philips-tv-v2",
 
 		// Wird aufgerufen, wenn Adapter initialisiert wird
 		ready: async () => {
