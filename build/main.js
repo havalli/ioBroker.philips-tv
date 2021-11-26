@@ -95,7 +95,6 @@ function startAdapter(options) {
                         // watch own states
                         adapter.subscribeStates(adapter.namespace + ".*");
                         adapter.subscribeObjects(adapter.namespace + ".*");
-                        adapter.log.error("blablub2!");
                         setImmediate(pingThread);
                         return [2 /*return*/];
                 }
@@ -249,14 +248,10 @@ function poll() {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0:
-                    // TODO
-                    adapter.log.error("blablub3!");
-                    global_1.Global.log("Fetching data from tv");
-                    return [4 /*yield*/, Promise.all([
-                            requestAudio(),
-                            requestPower(),
-                        ])];
+                case 0: return [4 /*yield*/, Promise.all([
+                        requestAudio(),
+                        requestPower(),
+                    ])];
                 case 1:
                     _a.sent();
                     return [2 /*return*/];
@@ -271,8 +266,6 @@ function requestAudio() {
             switch (_c.label) {
                 case 0:
                     _c.trys.push([0, 6, , 7]);
-                    adapter.log.error("blablub4!");
-                    global_1.Global.log("Fetching audio volume from tv");
                     _b = (_a = JSON).parse;
                     return [4 /*yield*/, GET("audio/volume")];
                 case 1:
@@ -334,7 +327,6 @@ function requestPower() {
             switch (_c.label) {
                 case 0:
                     _c.trys.push([0, 4, , 5]);
-                    global_1.Global.log("Fetching powerstate from tv");
                     _b = (_a = JSON).parse;
                     return [4 /*yield*/, GET("powerstate")];
                 case 1:
@@ -408,7 +400,7 @@ function pingThread() {
                     if (!connectionAlive) return [3 /*break*/, 4];
                     if (!oldValue) {
                         // connection is now alive again
-                        global_1.Global.log("The TV with host " + hostname + " is now reachable. BLA", "info");
+                        global_1.Global.log("The TV with host " + hostname + " is now reachable.", "info");
                     }
                     // update information
                     return [4 /*yield*/, poll()];

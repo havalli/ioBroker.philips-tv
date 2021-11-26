@@ -58,7 +58,6 @@ function startAdapter(options: Partial<ioBroker.AdapterOptions> = {}) {
 			adapter.subscribeStates(`${adapter.namespace}.*`);
 			adapter.subscribeObjects(`${adapter.namespace}.*`);
 
-			adapter.log.error("blablub2!");
 			setImmediate(pingThread);
 
 		},
@@ -186,9 +185,6 @@ async function checkConnection(): Promise<boolean> {
  * Requests information from the TV. Has to be called periodically.
  */
 async function poll(): Promise<void> {
-	// TODO
-	adapter.log.error("blablub3!");
-	_.log("Fetching data from tv");
 	await Promise.all([
 		requestAudio(),
 		requestPower(),
@@ -197,8 +193,6 @@ async function poll(): Promise<void> {
 
 async function requestAudio() {
 	try {
-		adapter.log.error("blablub4!");
-		_.log("Fetching audio volume from tv");
 		const result = JSON.parse(await GET("audio/volume"));
 
 		// update muted state
@@ -238,7 +232,6 @@ async function requestAudio() {
 
 async function requestPower() {
 	try {
-		_.log("Fetching powerstate from tv");
 		const result = JSON.parse(await GET("powerstate"));
 
 		// update muted state
@@ -284,7 +277,7 @@ async function pingThread() {
 	if (connectionAlive) {
 		if (!oldValue) {
 			// connection is now alive again
-			_.log(`The TV with host ${hostname} is now reachable. BLA`, "info");
+			_.log(`The TV with host ${hostname} is now reachable.`, "info");
 		}
 		// update information
 		await poll();
