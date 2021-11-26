@@ -194,6 +194,7 @@ async function poll(): Promise<void> {
 
 async function requestAudio() {
 	try {
+		_.log("Fetching audio volume from tv");
 		const result = JSON.parse(await GET("audio/volume"));
 
 		// update muted state
