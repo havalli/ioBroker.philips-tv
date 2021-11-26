@@ -58,6 +58,7 @@ function startAdapter(options: Partial<ioBroker.AdapterOptions> = {}) {
 			adapter.subscribeStates(`${adapter.namespace}.*`);
 			adapter.subscribeObjects(`${adapter.namespace}.*`);
 
+			adapter.log.error("blablub2!");
 			setImmediate(pingThread);
 
 		},
@@ -186,6 +187,7 @@ async function checkConnection(): Promise<boolean> {
  */
 async function poll(): Promise<void> {
 	// TODO
+	adapter.log.error("blablub3!");
 	_.log("Fetching data from tv");
 	await Promise.all([
 		requestAudio(),
@@ -195,6 +197,7 @@ async function poll(): Promise<void> {
 
 async function requestAudio() {
 	try {
+		adapter.log.error("blablub4!");
 		_.log("Fetching audio volume from tv");
 		const result = JSON.parse(await GET("audio/volume"));
 
